@@ -4,22 +4,23 @@
 #include "esp_adc_cal.h"
 #include <config.h>
 
-const char* bN[10] = { 
-    (char*)"Green",
-    (char*)"Red",
-    (char*)"Yellow",
-    (char*)"Blue",
-    (char*)"Orange",
-    (char*)"Select",
-    (char*)"Start",
-    (char*)"Tilt",
-    (char*)"Strum up",
-    (char*)"Strum down",
+const char *bN[11] = {
+    (char *)"Green",
+    (char *)"Red",
+    (char *)"Yellow",
+    (char *)"Blue",
+    (char *)"Orange",
+    (char *)"W3 6-freet Guitar (only GHLive)",
+    (char *)"Select",
+    (char *)"Start",
+    (char *)"Tilt",
+    (char *)"Strum up",
+    (char *)"Strum down",
 
 };
 
-Bounce btns[10] = { Bounce(), Bounce(), Bounce(), Bounce(), Bounce(), Bounce(), Bounce(), Bounce(), Bounce(), Bounce() };
-int bpins[10] = { FRET_GREEN, FRET_RED, FRET_YELLOW, FRET_BLUE, FRET_ORANGE, BUTTON_SELECT, BUTTON_START, TILT_PIN, STRUM_UP, STRUM_DOWN };
+Bounce btns[11] = { Bounce(), Bounce(), Bounce(), Bounce(), Bounce(), Bounce(), Bounce(), Bounce(), Bounce(), Bounce(), Bounce() };
+int bpins[11] = { FRET_GREEN, FRET_RED, FRET_YELLOW, FRET_BLUE, FRET_ORANGE, FRET_W3_GHLIVE, BUTTON_SELECT, BUTTON_START, TILT_PIN, STRUM_UP, STRUM_DOWN };
 BleGamepad pad = BleGamepad(DEVICE_NAME, "Strum.bar", 100);
 BleGamepadConfiguration cfg;
 bool update = false;
