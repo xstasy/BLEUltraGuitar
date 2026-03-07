@@ -7,11 +7,14 @@ const char* DEVICE_NAME="BLEUltraGuitar";
 
 //  Generally anything from GPIO 4 and
 //     upwards can be used for buttons
-#define FRET_GREEN                  32
-#define FRET_RED                    33
-#define FRET_YELLOW                 25
-#define FRET_BLUE                   26
-#define FRET_ORANGE                 27
+#define FRET_GREEN                  32 // Or Black 1 (top-left) in Guitar Hero Live (6 fret)
+#define FRET_RED                    33 // Or Black 2 (top-center) in Guitar Hero Live (6 fret)
+#define FRET_YELLOW                 25 // Or Black 3 (top-right) in Guitar Hero Live (6 fret)
+#define FRET_BLUE                   26 // Or White 1 (bottom-left) in Guitar Hero Live (6 fret)
+#define FRET_ORANGE                 27 // Or White 2 (bottom-center) in Guitar Hero Live (6 fret)
+#define FRET_W3_GHLIVE              13 // White 3 (bottom-right) only in Guitar Hero Live (6 fret)
+
+
 #define FRET_BOUNCE_uS              50
 
 #define STRUM_UP                    14

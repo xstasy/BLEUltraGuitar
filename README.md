@@ -17,7 +17,8 @@ ESP32 Bluetooth 4.2 Low Energy Guitar Hero Controller
 - Click the PIO Icon on the left menu and select upload / upload & monitor under BLEUltraGuitar
 
 ## Default Pins
-    - Green: 32 - Red: 33 - Yellow: 25 - Blue: 26 - Orange: 27 
+    - In 5 fret Guitar Hero: Green: 32 - Red: 33 - Yellow: 25 - Blue: 26 - Orange: 27 
+    - In 6 fret Guitar Hero Live: Black 1 (top-left): 32 - Black 2 (top-center): 33 - Black 3 (top-right): 25 - White 1 (bottom-left): 26 - White 2 (bottom-center): 27 - White 3 (bottom-right): 13
     - Strum up: 14 - Strum down: 12 - Start: 22 - Select: 19
     - Tilt: 15 - Whammy: 36 - Battery: 39
 

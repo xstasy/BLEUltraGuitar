@@ -64,9 +64,9 @@
 
 bool Button(int b, bool pressed = true) {
     if(pressed) {
-        if(b >= 8) pad.setHat1(b == 8 ? HAT_UP : HAT_DOWN);
+        if(b >= 9) pad.setHat1(b == 9 ? HAT_UP : HAT_DOWN);
         else pad.press(b+1);
-    } else if(b >= 8) 
+    } else if(b >= 9) 
         pad.setHat1(HAT_CENTERED);
     else
         pad.release(b+1);
@@ -87,11 +87,11 @@ void setup() {
         Serial.println("BLEUltraGuitar");
     #endif
 
-    for(int i = 0; i < 10; i++) {
+    for(int i = 0; i < 11; i++) {
         btns[i].attach ( (int)bpins[i], INPUT_PULLUP);
-        if(i < 8)       btns[i].interval(FRET_BOUNCE_uS);
-        else if(i == 8) btns[i].interval(STRUM_UP_BOUNCE_uS);
-        else if(i == 9) btns[i].interval(STRUM_DOWN_BOUNCE_uS);
+        if(i < 9)       btns[i].interval(FRET_BOUNCE_uS);
+        else if(i == 9) btns[i].interval(STRUM_UP_BOUNCE_uS);
+        else if(i == 10) btns[i].interval(STRUM_DOWN_BOUNCE_uS);
         #if defined(DEBUG_MODE) || defined(DEBUG_BUTTONS)
             Serial.printf("%s: configured using pin %d\n", bN[i], bpins[i]);
         #endif
@@ -99,7 +99,7 @@ void setup() {
 
     cfg.setAutoReport(0);
     cfg.setWhichAxes(0, 0, 0, 0, 0, 0, wp != 0 ? 1 : 0, bp != 0 ? 1 : 0);
-    cfg.setButtonCount(tp > 0 ? 8 : 7);
+    cfg.setButtonCount(tp > 0 ? 9 : 8);
     cfg.setHatSwitchCount(1);
     cfg.setVid(0x1430);
     cfg.setPid(0x4748);
@@ -112,7 +112,7 @@ void setup() {
     #if defined(BATTERY_PIN) && BATTERY_PIN > 0
         xTaskCreate(&bTask, "bTask", 10000, NULL, 10, NULL);
         esp_err_t error;
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 6; i++) {
             esp_err_t error = esp_sleep_enable_ext0_wakeup(static_cast<gpio_num_t>(bpins[i]), 0);
             switch(error) {
                 case ESP_OK:
@@ -136,7 +136,7 @@ void loop() {
         long s = micros();
     #endif
 
-    for(int i = 0; i < 10; i++) {
+    for(int i = 0; i < 11; i++) {
         btns[i].update();
         if(btns[i].fell())      update = Button(i);
         else if(btns[i].rose()) update = Button(i, 0);
