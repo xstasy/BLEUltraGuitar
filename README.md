@@ -21,6 +21,7 @@ ESP32 Bluetooth 4.2 Low Energy Guitar Hero Controller
     - In 6 fret Guitar Hero Live: Black 1 (top-left): 32 - Black 2 (top-center): 33 - Black 3 (top-right): 25 - White 1 (bottom-left): 26 - White 2 (bottom-center): 27 - White 3 (bottom-right): 13
     - Strum up: 14 - Strum down: 12 - Start: 22 - Select: 19
     - Tilt: 15 - Whammy: 36 - Battery: 39
+    - Press SELECT + START at boot for PlatformIO OTA updates. On first use or if the WiFi connection fails, doing so will host an open AP to set up your WiFi configuration
 
 [$2.31 ESP32 with battery charging circuit + connector](https://www.aliexpress.com/item/33009178296.html) @ Aliexpress
 
