@@ -15,13 +15,14 @@ ESP32 Bluetooth 4.2 Low Energy Guitar Hero Controller
 - Open project from [Platform.IO](https://platformio.org/platformio-ide) home screen
 - Define proper pins in config.h (or use the ones defined in there)
 - Click the PIO Icon on the left menu and select upload / upload & monitor under BLEUltraGuitar
+- Optional: Press SELECT + START on your guitar at boot for PlatformIO OTA updates. If WiFi is not configured or fails to connect, an open AP will be created for setup
 
 ## Default Pins
     - In 5 fret Guitar Hero: Green: 32 - Red: 33 - Yellow: 25 - Blue: 26 - Orange: 27 
     - In 6 fret Guitar Hero Live: Black 1 (top-left): 32 - Black 2 (top-center): 33 - Black 3 (top-right): 25 - White 1 (bottom-left): 26 - White 2 (bottom-center): 27 - White 3 (bottom-right): 13
     - Strum up: 14 - Strum down: 12 - Start: 22 - Select: 19
     - Tilt: 15 - Whammy: 36 - Battery: 39
-    - Press SELECT + START at boot for PlatformIO OTA updates. On first use or if the WiFi connection fails, doing so will host an open AP to set up your WiFi configuration
+    
 
 [$2.31 ESP32 with battery charging circuit + connector](https://www.aliexpress.com/item/33009178296.html) @ Aliexpress
 
