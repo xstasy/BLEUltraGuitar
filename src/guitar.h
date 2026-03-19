@@ -23,7 +23,7 @@ Bounce btns[11] = { Bounce(), Bounce(), Bounce(), Bounce(), Bounce(), Bounce(), 
 int bpins[11] = { FRET_GREEN, FRET_RED, FRET_YELLOW, FRET_BLUE, FRET_ORANGE, FRET_W3_GHLIVE, BUTTON_SELECT, BUTTON_START, TILT_PIN, STRUM_UP, STRUM_DOWN };
 BleGamepad pad = BleGamepad(DEVICE_NAME, "Strum.bar", 100);
 BleGamepadConfiguration cfg;
-bool update = false;
+volatile bool update = false;
 int ticks = 0;
 int lastHit = millis();
 

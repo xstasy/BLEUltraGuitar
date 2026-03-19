@@ -1,4 +1,5 @@
 #include <guitar.h>
+#include "ota.h"
 
 #if defined(BATTERY_PIN) && BATTERY_PIN > 0
     void bTask(void * parameter) {
@@ -16,6 +17,7 @@
                 int lvl = map(bAvg, bMin, 4095, 0, 100);
                 //pad.setBatteryLevel(lvl);
                 pad.setSlider1(map(bAvg, bMin, 4095, 0, 32767));
+                update = true; // signal main loop to send report
                 #if defined(DEBUG_MODE) || defined(DEBUG_BATTERY)
                     Serial.printf("Battery: %d - Raw: %d\n", lvl, bSamples[bIndex]);
                 #endif
@@ -54,6 +56,7 @@
                     wLast = 32767;
                     pad.setSlider2(wLast);
                 } else pad.setSlider2(wAvg);
+                update = true;  // signal main loop to send report
             }
 
             if(ft) ft=0;
@@ -87,11 +90,26 @@ void setup() {
         Serial.println("BLEUltraGuitar");
     #endif
 
-    for(int i = 0; i < 11; i++) {
-        btns[i].attach ( (int)bpins[i], INPUT_PULLUP);
-        if(i < 9)       btns[i].interval(FRET_BOUNCE_uS);
-        else if(i == 9) btns[i].interval(STRUM_UP_BOUNCE_uS);
-        else if(i == 10) btns[i].interval(STRUM_DOWN_BOUNCE_uS);
+    // --- OTA boot check ---
+    // Hold SELECT + START while powering on to enter OTA / WiFi-config mode.
+    // Pins are sampled here before Bounce objects are initialised — no overhead in normal operation.
+    pinMode(BUTTON_SELECT, INPUT_PULLUP);
+    pinMode(BUTTON_START, INPUT_PULLUP);
+    if (digitalRead(BUTTON_SELECT) == LOW && digitalRead(BUTTON_START) == LOW)
+    {
+        enterOtaMode(); // never returns
+    }
+    // --- End OTA boot check ---
+
+    for (int i = 0; i < 11; i++)
+    {
+        btns[i].attach((int)bpins[i], INPUT_PULLUP);
+        if (i < 9)
+            btns[i].interval(FRET_BOUNCE_uS);
+        else if (i == 9)
+            btns[i].interval(STRUM_UP_BOUNCE_uS);
+        else if (i == 10)
+            btns[i].interval(STRUM_DOWN_BOUNCE_uS);
         #if defined(DEBUG_MODE) || defined(DEBUG_BUTTONS)
             Serial.printf("%s: configured using pin %d\n", bN[i], bpins[i]);
         #endif
@@ -150,13 +168,16 @@ void loop() {
                 esp_deep_sleep_start();
         }
     #endif
-    
-    if(update) {
-        if(bp > 0) lastHit = millis();   
+
+    if (update)
+    {
+        update = false;
+        if (bp > 0)
+            lastHit = millis();
         pad.sendReport();
     }
 
-    #ifdef DEBUG_LOOP_TIME
+#ifdef DEBUG_LOOP_TIME
         Serial.printf("%d, ", (micros() - s));
     #endif
 }
